@@ -3,9 +3,12 @@ FROM node:18-bullseye
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+COPY tsconfig*.json ./
+
+RUN npm ci --legacy-peer-deps
 
 COPY . .
+
 RUN npm run build
 
 EXPOSE 3000
